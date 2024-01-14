@@ -73,18 +73,17 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div style={{ backgroundColor: 'orange' }}>
       <div id="map" className="map"></div>
       <br/>
       <div>
-        <label><b>Selected Point Coordinates:</b></label>
-        {selectedPoint && <span> Latitude: {selectedPoint[0]}, Longitude: {selectedPoint[1]}</span>}
+        <label><h1>Selected Point Coordinates:</h1></label>
+        {selectedPoint && <span><b> Latitude: </b>{selectedPoint[0]},<br/><b> Longitude: </b>{selectedPoint[1]}</span>}
       </div>
       <div>
-        <label><b>Enter buffer distance in kilometers:</b></label>
+        <label><h2>Enter buffer distance in kilometers:</h2></label>
         <input type="number" value={bufferDistance} onChange={handleBufferDistanceChange} />
       </div>
-      <br/>
       <div>
         {selectedPoint && bufferDistance && (
           <div>
@@ -99,6 +98,7 @@ const App = () => {
                   />
                   Centroid Based Method
                 </label>
+                <br/>
                 <label>
                   <input
                     type="radio"
@@ -110,8 +110,20 @@ const App = () => {
                 </label>
             </div>
             <br/>
-            <span>Please submit to fetch the results: </span>
-            <button onClick={handleSubmit}>Submit</button>
+            <span><b>Please submit to fetch the results: </b></span>
+            <button onClick={handleSubmit}
+              style={{
+                backgroundColor: 'black',
+                color: 'white',
+                padding: '10px 15px',
+                border: 'none',
+                borderRadius: "1rem",
+                cursor: 'pointer',
+                transition: 'background-color 0.3s ease',
+              }}
+              onMouseOver={(e) => e.target.style.backgroundColor = 'green'}
+              onMouseOut={(e) => e.target.style.backgroundColor = 'black'}
+            >Submit</button>
           </div>
         )}
       </div>
@@ -120,11 +132,10 @@ const App = () => {
         {fetchedData ? (
           <div>
             <p>Total Population: {fetchedData.weighted_population}</p>
-            <p>Average Salary: {fetchedData.weighted_average_salary}</p>
-            {/* Add more lines for each property you want to display */}
+            <p>Average Salary( in Dollars): {fetchedData.weighted_average_salary}</p>
           </div>
         ) : (
-          <p>No data fetched yet.</p>
+          <p>No data fetched yet. Please submit to fetch results</p>
         )}
       </div>
     </div>
